@@ -1,13 +1,13 @@
 package basic;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Patient extends User{
 	private Date birthdate;
 	
-	public Patient(String name, Date birthdate, String id) {
+	public Patient(String name, Date date, String id) {
 		super(name,id);
-		this.birthdate = birthdate;
+		this.birthdate = date;
 	}
 	
 	public Date getBirthdate() {

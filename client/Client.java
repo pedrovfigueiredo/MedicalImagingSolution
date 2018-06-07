@@ -5,10 +5,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.rmi.NotBoundException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+
+import basic.Diagnosis;
+import basic.Patient;
+import basic.Physician;
 
 public class Client {
 	Socket internalSocket;
@@ -23,10 +26,28 @@ public class Client {
 	// java Client -a file1.diag file2.diag 
 	public static void main(String[] args) {
 		
-		
-		
+		// l or a
+		String option = args[0].substring(1);
 		try {
-			new Client(new Socket("localhost", 12345));
+			Client client = new Client(new Socket("localhost", 12345));
+			
+			switch (option) {
+			case "l":
+				client.listDiagnoses();
+				break;
+			case "a":
+				ArrayList<String> filenames = new ArrayList<>();
+				
+				for (int i = 1; i < args.length; i++) {
+					filenames.add(args[i]);
+				}
+				
+				client.addDiagnoses(filenames);
+				break;
+			default:
+				System.out.println("Invalid option.\nUse: java Client -[option] [files]");
+				return;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,9 +65,42 @@ public class Client {
 		}
 		
 		System.out.println("Client created.");
+	}
+	
+	public void addDiagnoses(ArrayList<String> filenames) {
 		
-		writeMsg("ready");
+		// Message to Server telling to expect to add diagnoses
+		writeMsg("1");
 		
+		// Sends server information about number of diagnoses to expect
+		writeMsg(Integer.toString(filenames.size()));
+		
+		for (String filename : filenames) {
+			// Read from file JSON style and build Diagnoses
+			
+			Diagnosis diagnosis = new Diagnosis(new ArrayList<>(), 0, new Patient("", new Date(), ""), new Physician("", "", "")); 
+			
+			try {
+				object_writer.writeObject(diagnosis);
+				object_writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		// Prints to user the successful message coming from server
+		System.out.println(readMsg());
+		
+		
+	}
+	
+	public void listDiagnoses() {
+		// Message to Server telling list diagnoses
+		writeMsg("2");
+		
+		// Prints server response to user
+		System.out.println(readMsg());
 	}
 	
 	public String readMsg() {

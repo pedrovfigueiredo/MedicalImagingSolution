@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class Diagnosis implements Serializable{
 	private ArrayList<Image> images;
-	private Date timestamp;
+	private long timestamp;
 	private Patient patient;
 	private Physician physician;
 	
-	public Diagnosis(ArrayList<Image> images, Date timestamp, Patient patient, Physician physician) {
+	public Diagnosis(ArrayList<Image> images, long timestamp, Patient patient, Physician physician) {
 		super();
 		this.images = images;
 		this.timestamp = timestamp;
@@ -21,7 +21,7 @@ public class Diagnosis implements Serializable{
 	
 	@Override
 	public String toString() {
-		String string = "Time: " + timestamp.toString() + "\n" +
+		String string = "Time: " + new Date(timestamp) + "\n" +
 						"Pacient: " + patient.getName() + "\n" +
 						"Physician: " + physician.getName() + "\n" +
 						"Image count: " + images.size() + "\n";
@@ -36,11 +36,11 @@ public class Diagnosis implements Serializable{
 		this.images = images;
 	}
 
-	public Date getTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 
