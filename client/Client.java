@@ -27,7 +27,10 @@ public class Client {
 	public static void main(String[] args) {
 		
 		// l or a
-		String option = args[0].substring(1);
+		String option = "";
+		if (args.length > 0) {
+			option = args[0].substring(1);
+		}
 		try {
 			Client client = new Client(new Socket("localhost", 12345));
 			
@@ -63,8 +66,6 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("Client created.");
 	}
 	
 	public void addDiagnoses(ArrayList<String> filenames) {
@@ -75,16 +76,22 @@ public class Client {
 		// Sends server information about number of diagnoses to expect
 		writeMsg(Integer.toString(filenames.size()));
 		
+		System.out.println("Diagnoses to be sent to the blockchain:");
+		
 		for (String filename : filenames) {
-			// Read from file JSON style and build Diagnoses
+			// TODO: Read from file JSON style and build Diagnoses
 			
-			Diagnosis diagnosis = new Diagnosis(new ArrayList<>(), 0, new Patient("", new Date(), ""), new Physician("", "", "")); 
+			//Diagnosis diagnosis = new Diagnosis(new ArrayList<>(), 0, new Patient("", new Date(), ""), new Physician("", "", "")); 
+			
+			Diagnosis diagnosis = new Diagnosis(new ArrayList<>(), 100, new Patient("Calvin", new Date(), "1"), new Physician("Pedro", "2", "ELTE"));
+			
+			System.out.println("");
+			System.out.println(diagnosis.toString());
 			
 			try {
 				object_writer.writeObject(diagnosis);
 				object_writer.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -105,9 +112,13 @@ public class Client {
 	
 	public String readMsg() {
 		while(!reader.hasNext()){}
-		
 		String message = reader.nextLine();
-		return message;
+		
+		while(reader.hasNext()) {
+			message = message.concat("\n" + reader.nextLine());
+		}
+		
+		return message + "\n";
 	}
 	
 	public void writeMsg(String message) {

@@ -11,15 +11,22 @@ public class Main {
 		
 		// Handling client connections
 		System.out.println("Launching thread to handle clients.");
-		Thread handleClients = new Thread(new HandleClients(port, lockClients, blockchain));
+		Thread handleClients = new Thread(new HandleClients(port,
+															lockClients,
+															blockchain));
 		handleClients.start();
 		
-		// TODO: Launch thread to check validity of blockchain
-		
-		
+		//Launch thread to check validity of blockchain from 
+		long validationIntervalInSeconds = 10;
+		Thread checkBlockchain = new Thread(new ValidateBlockchain(Thread.currentThread(),
+																  lockClients,
+																  blockchain,
+																  validationIntervalInSeconds));
+		checkBlockchain.start();
 		
 		while (!Thread.currentThread().isInterrupted()) {}
 		
+		checkBlockchain.interrupt();
 		handleClients.interrupt();
 	}
 

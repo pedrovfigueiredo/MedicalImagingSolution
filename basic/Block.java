@@ -26,7 +26,7 @@ public class Block {
 		String diag = "Diagnoses: " + "\n";
 		
 		for (int i = 0; i < diagnoses.size(); i++) {
-			diag.concat(String.valueOf(i + 1) + ":\n" + diagnoses.get(i));
+			diag = diag.concat(String.valueOf(i + 1) + ":\n" + diagnoses.get(i));
 		}
 		
 		return string + diag;
@@ -36,8 +36,14 @@ public class Block {
 	public String calculateHash() {
 		String calculatedhash = "";
 		
+		String diag = "";
+		
+		for (int i = 0; i < diagnoses.size(); i++) {
+			diag.concat(String.valueOf(i + 1) + ":\n" + diagnoses.get(i));
+		}
+		
 		try {
-			calculatedhash = StringUtil.applySha256(hash);
+			calculatedhash = StringUtil.applySha256(prevHash + diag + String.valueOf(timestamp) + nonce);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

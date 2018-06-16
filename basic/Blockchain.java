@@ -17,11 +17,20 @@ public class Blockchain {
 	
 	@Override
 	public String toString() {
-		String string = "\t --Blockchain--\n";
-		for (Block block : chain) {
-			string.concat(block.toString());
+		String str1 = "\n--Blockchain--\n";
+		
+		if (chain.isEmpty()) {
+			str1 = str1.concat("-----------------------------------\n");
+			str1 = str1.concat("Empty\n");
+		}else {
+			for (int i=1; i < chain.size(); i++) {
+				str1 = str1.concat("-----------------------------------\n");
+				str1 = str1.concat(String.valueOf(i) + ":\n" + chain.get(i).toString());
+			}
 		}
-		return string;
+		
+		str1 = str1.concat("-----------------------------------\n\n");
+		return str1;
 	}
 	
 	// Add reference to medium tutorial
@@ -59,6 +68,7 @@ public class Blockchain {
 		block.mineBlock(difficulty);
 		synchronized (lock) {
 			this.chain.add(block);
+			System.out.println("Tamanho após add: " + String.valueOf(this.chain.size()));
 		}
 	}
 	

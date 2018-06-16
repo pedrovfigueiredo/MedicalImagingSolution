@@ -65,14 +65,14 @@ public class Server implements Runnable {
 			for (int i = 0; i < diagonesCount; i++) {
 				diagnoses.add((Diagnosis) object_reader.readObject());
 					
-				System.out.println("Added diagnosis " + diagnoses.get(i) + ".");
+				System.out.println("Added diagnosis:\n" + diagnoses.get(i));
 			}
 				
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 		
-		String lastHash = "0";
+		String lastHash = null;
 		
 		if (this.blockchain.getChainLength() > 0){
 			lastHash = blockchain.getBlockAtIndex(this.blockchain.getChainLength() - 1).getHash();
@@ -85,6 +85,8 @@ public class Server implements Runnable {
 	
 	private void listDiagnoses() {
 		// add other options
+		System.out.println("Listing diagnoses...");
+		System.out.println(this.blockchain.toString());
 		writeMsg(this.blockchain.toString());
 	}
 	

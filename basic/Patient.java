@@ -1,8 +1,9 @@
 package basic;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Patient extends User{
+public class Patient extends User implements Serializable{
 	private Date birthdate;
 	
 	public Patient(String name, Date date, String id) {

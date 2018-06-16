@@ -1,6 +1,8 @@
 package basic;
 
-public class Physician extends User {
+import java.io.Serializable;
+
+public class Physician extends User implements Serializable {
 	
 	private String institution;
 	
