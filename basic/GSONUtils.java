@@ -12,6 +12,10 @@ import java.util.Base64;
 import com.google.gson.Gson;
 
 public class GSONUtils {
+	/*
+	 * Based on the following Medium Tutorial:
+	 * https://medium.com/@ssaurel/parse-and-write-json-data-in-java-with-gson-dd8d1285b28
+	 */
 	public static ArrayList<Diagnosis> getDiagnosesFromJSON(String filename) {
 		
 		ArrayList<Diagnosis> diagnoses = new ArrayList<>();

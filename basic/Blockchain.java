@@ -33,7 +33,10 @@ public class Blockchain {
 		return str1;
 	}
 	
-	// Add reference to medium tutorial
+	/*
+	 * Method taken from the following Medium tutorial:
+	 * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+	 */
 	public boolean isChainValid(Object lock) {
 		Block currentBlock; 
 		Block previousBlock;
@@ -68,7 +71,7 @@ public class Blockchain {
 		block.mineBlock(difficulty);
 		synchronized (lock) {
 			this.chain.add(block);
-			System.out.println("Tamanho após add: " + String.valueOf(this.chain.size()));
+			System.out.println("Chain's size after adding new block: " + String.valueOf(this.chain.size()));
 		}
 	}
 	

@@ -32,7 +32,10 @@ public class Block {
 		return string + diag;
 	}
 	
-	// Add reference to medium tutorial
+	/*
+	 * Method taken from the following Medium tutorial:
+	 * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+	 */
 	public String calculateHash() {
 		String calculatedhash = "";
 		
@@ -50,7 +53,10 @@ public class Block {
 		return calculatedhash;
 	}
 	
-	// Add reference to medium tutorial
+	/*
+	 * Method taken from the following Medium tutorial:
+	 * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+	 */
 	public void mineBlock(int difficulty) {
 		String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0" 
 		while(!hash.substring( 0, difficulty).equals(target)) {
