@@ -1,14 +1,14 @@
 package basic;
 
 public class Result_JSON {
-	private Diagnosis_JSON[] diagnoses;
+	private Diagnosis[] diagnoses;
 
-    public Diagnosis_JSON[] getDiagnoses()
+    public Diagnosis[] getDiagnoses()
     {
         return diagnoses;
     }
 
-    public void setDiagnoses(Diagnosis_JSON[] diagnoses)
+    public void setDiagnoses(Diagnosis[] diagnoses)
     {
         this.diagnoses = diagnoses;
     }

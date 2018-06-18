@@ -17,7 +17,7 @@ public class Main {
 		handleClients.start();
 		
 		//Launch thread to check validity of blockchain from 
-		long validationIntervalInSeconds = 10;
+		long validationIntervalInSeconds = 30;
 		Thread checkBlockchain = new Thread(new ValidateBlockchain(Thread.currentThread(),
 																  lockClients,
 																  blockchain,

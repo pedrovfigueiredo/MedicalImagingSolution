@@ -6,12 +6,10 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import basic.Diagnosis;
-import basic.Patient;
-import basic.Physician;
+import basic.GSONUtils;
 
 public class Client {
 	Socket internalSocket;
@@ -23,7 +21,7 @@ public class Client {
 	int option;
 	
 	// java Client -l
-	// java Client -a file1.diag file2.diag 
+	// java Client -a file1.json 
 	public static void main(String[] args) {
 		
 		// l or a
@@ -39,13 +37,7 @@ public class Client {
 				client.listDiagnoses();
 				break;
 			case "a":
-				ArrayList<String> filenames = new ArrayList<>();
-				
-				for (int i = 1; i < args.length; i++) {
-					filenames.add(args[i]);
-				}
-				
-				client.addDiagnoses(filenames);
+				client.addDiagnoses(args[1]);
 				break;
 			default:
 				System.out.println("Invalid option.\nUse: java Client -[option] [files]");
@@ -68,28 +60,25 @@ public class Client {
 		}
 	}
 	
-	public void addDiagnoses(ArrayList<String> filenames) {
+	public void addDiagnoses(String filename) {
 		
 		// Message to Server telling to expect to add diagnoses
 		writeMsg("1");
 		
+		ArrayList<Diagnosis> diagnoses = GSONUtils.getDiagnosesFromJSON(filename);
+		
 		// Sends server information about number of diagnoses to expect
-		writeMsg(Integer.toString(filenames.size()));
+		writeMsg(Integer.toString(diagnoses.size()));
 		
 		System.out.println("Diagnoses to be sent to the blockchain:");
 		
-		for (String filename : filenames) {
-			// TODO: Read from file JSON style and build Diagnoses
-			
-			//Diagnosis diagnosis = new Diagnosis(new ArrayList<>(), 0, new Patient("", new Date(), ""), new Physician("", "", "")); 
-			
-			Diagnosis diagnosis = new Diagnosis(new ArrayList<>(), 100, new Patient("Calvin", new Date(), "1"), new Physician("Pedro", "2", "ELTE"));
+		for (Diagnosis d : diagnoses) {
 			
 			System.out.println("");
-			System.out.println(diagnosis.toString());
+			System.out.println(d.toString());
 			
 			try {
-				object_writer.writeObject(diagnosis);
+				object_writer.writeObject(d);
 				object_writer.flush();
 			} catch (IOException e) {
 				e.printStackTrace();

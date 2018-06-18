@@ -23,9 +23,9 @@ public class Blockchain {
 			str1 = str1.concat("-----------------------------------\n");
 			str1 = str1.concat("Empty\n");
 		}else {
-			for (int i=1; i < chain.size(); i++) {
+			for (int i=0; i < chain.size(); i++) {
 				str1 = str1.concat("-----------------------------------\n");
-				str1 = str1.concat(String.valueOf(i) + ":\n" + chain.get(i).toString());
+				str1 = str1.concat(String.valueOf(i + 1) + ":\n" + chain.get(i).toString());
 			}
 		}
 		

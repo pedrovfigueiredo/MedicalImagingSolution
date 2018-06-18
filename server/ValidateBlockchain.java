@@ -24,6 +24,7 @@ public class ValidateBlockchain implements Runnable{
 				System.out.println("[ValidateBlockchain] Blockchain not valid. Interrupting main thread");
 				mainThread.interrupt();
 			}
+			System.out.println("[ValidateBlockchain] Blockchain valid.");
 			try {
 				Thread.sleep(seconds * 1000);
 			} catch (InterruptedException e) {

@@ -13,9 +13,9 @@
 				"id":1
 			},
 			"images": [
-				"testing1.jpg",
-				"testing2.jpg",
-				"testing3.jpg"
+				"/Users/PedroFigueiredo/eclipse-workspace/MedicalImagingSolution/src/media/testing1.jpg",
+				"/Users/PedroFigueiredo/eclipse-workspace/MedicalImagingSolution/src/media/testing2.jpg",
+				"/Users/PedroFigueiredo/eclipse-workspace/MedicalImagingSolution/src/media/testing3.jpg"
 			]
 		},
 		{
@@ -31,7 +31,7 @@
 				"id":2
 			},
 			"images": [
-				"testing1.jpg"
+				"/Users/PedroFigueiredo/eclipse-workspace/MedicalImagingSolution/src/media/testing1.jpg"
 			]
 		},
 		{
@@ -47,8 +47,8 @@
 				"id":2
 			},
 			"images": [
-				"testing1.jpg",
-				"testing2.jpg"
+				"/Users/PedroFigueiredo/eclipse-workspace/MedicalImagingSolution/src/media/testing1.jpg",
+				"/Users/PedroFigueiredo/eclipse-workspace/MedicalImagingSolution/src/media/testing2.jpg"
 			]
 		}
 	]

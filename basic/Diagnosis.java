@@ -1,18 +1,17 @@
 package basic;
 
-import java.awt.Image;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
 public class Diagnosis implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Image> images;
+	private ArrayList<String> images;
 	private long timestamp;
 	private Patient patient;
 	private Physician physician;
 	
-	public Diagnosis(ArrayList<Image> images, long timestamp, Patient patient, Physician physician) {
+	public Diagnosis(ArrayList<String> images, long timestamp, Patient patient, Physician physician) {
 		super();
 		this.images = images;
 		this.timestamp = timestamp;
@@ -29,11 +28,11 @@ public class Diagnosis implements Serializable{
 		return string;
 	}
 
-	public ArrayList<Image> getImages() {
+	public ArrayList<String> getImages() {
 		return images;
 	}
 
-	public void setImages(ArrayList<Image> images) {
+	public void setImages(ArrayList<String> images) {
 		this.images = images;
 	}
 
