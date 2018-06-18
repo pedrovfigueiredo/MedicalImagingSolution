@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Physician extends User implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private String institution;
 	
 	public Physician(String name, String id, String institution) {

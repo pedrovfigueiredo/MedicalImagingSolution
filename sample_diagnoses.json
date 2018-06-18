@@ -1,0 +1,55 @@
+{
+	"diagnoses": [
+		{
+			"timestamp": 12312313213,
+			"patient": {
+				"name":"Pedro",
+				"birthday":"06/01/1998",
+				"id":1
+			},
+			"physician": {
+				"name":"Vinícius",
+				"birthday":"10/04/1992",
+				"id":1
+			},
+			"images": [
+				"testing1.jpg",
+				"testing2.jpg",
+				"testing3.jpg"
+			]
+		},
+		{
+			"timestamp": 12312312393,
+			"patient": {
+				"name":"Pedro",
+				"birthday":"06/01/1998",
+				"id":1
+			},
+			"physician": {
+				"name":"Matheus",
+				"birthday":"01/09/1980",
+				"id":2
+			},
+			"images": [
+				"testing1.jpg"
+			]
+		},
+		{
+			"timestamp": 12989763213,
+			"patient": {
+				"name":"Larissa",
+				"birthday":"04/11/1998",
+				"id":2
+			},
+			"physician": {
+				"name":"Matheus",
+				"birthday":"01/09/1980",
+				"id":2
+			},
+			"images": [
+				"testing1.jpg",
+				"testing2.jpg"
+			]
+		}
+	]
+}

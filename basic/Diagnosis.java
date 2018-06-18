@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Diagnosis implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Image> images;
 	private long timestamp;
 	private Patient patient;
