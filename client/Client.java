@@ -29,23 +29,48 @@ public class Client {
 		if (args.length > 0) {
 			option = args[0].substring(1);
 		}
+		
+		if (!isOptionValid(option)) {
+			promptErrorAndReturn();
+		}
+		
 		try {
 			Client client = new Client(new Socket("localhost", 12345));
 			
 			switch (option) {
 			case "l":
-				client.listDiagnoses();
+				if (args.length > 1) {
+					client.listDiagnoses(args[1]);
+				}else {
+					client.listDiagnoses();
+				}
 				break;
 			case "a":
-				client.addDiagnoses(args[1]);
+				if (args.length == 1) {
+					client.addDiagnoses(args[1]);
+				}else {
+					promptErrorAndReturn();
+				}
 				break;
 			default:
-				System.out.println("Invalid option.\nUse: java Client -[option] [files]");
-				return;
+				promptErrorAndReturn();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void promptErrorAndReturn() {
+		System.out.println("Invalid option.\nUse: java Client -[option] [file]");
+		return;
+	}
+	
+	private static boolean isOptionValid(String option) {
+		if (option.equals("l") || option.equals("a")) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public Client(Socket socket) {
@@ -94,6 +119,15 @@ public class Client {
 	public void listDiagnoses() {
 		// Message to Server telling list diagnoses
 		writeMsg("2");
+		
+		// Prints server response to user
+		System.out.println(readMsg());
+	}
+	
+	public void listDiagnoses(String id_or_name) {
+		// Message to Server telling list diagnoses according to id or name
+		writeMsg("3");
+		writeMsg(id_or_name);
 		
 		// Prints server response to user
 		System.out.println(readMsg());

@@ -11,6 +11,8 @@ import java.util.Scanner;
 import basic.Block;
 import basic.Blockchain;
 import basic.Diagnosis;
+import basic.Patient;
+import basic.Physician;
 
 public class Server implements Runnable {
 	Blockchain blockchain;
@@ -49,6 +51,8 @@ public class Server implements Runnable {
 		case 2: // List diagnoses
 			listDiagnoses();
 			break;
+		case 3:
+			listDiagnoses(readMsg());
 		default: // Invalid option
 			writeMsg("Invalid option.");
 			break;
@@ -83,11 +87,48 @@ public class Server implements Runnable {
 		writeMsg("Added diagnoses to the system.");
 	}
 	
+	// List all diagnoses (print blockchain)
 	private void listDiagnoses() {
-		// add other options
 		System.out.println("Listing diagnoses...");
 		System.out.println(this.blockchain.toString());
 		writeMsg(this.blockchain.toString());
+	}
+	
+	private void listDiagnoses(String id_or_name) {
+		
+		ArrayList<Diagnosis> matches = new ArrayList<>();
+		String result = "Diagnoses matching " + id_or_name + ":\n";
+		
+		int chain_length = this.blockchain.getChainLength();
+		
+		for (int i = 0; i < chain_length; i++) {
+			Block block = this.blockchain.getBlockAtIndex(i);
+			
+			for (Diagnosis diagnosis : block.getDiagnoses()) {
+				Patient patient = diagnosis.getPatient();
+				Physician physician = diagnosis.getPhysician();
+				
+				if (patient.getId().equals(id_or_name) ||
+					patient.getName().equals(id_or_name) ||
+					physician.getId().equals(id_or_name) ||
+					physician.getName().equals(id_or_name)) 
+				{
+					matches.add(diagnosis);
+				}
+			}
+		}
+		
+		if (matches.isEmpty()) {
+			writeMsg("No diagnoses for this ID or name were found.");
+			return;
+		}
+		
+		for(int i = 0; i < matches.size(); i++) {
+			result = result.concat(String.valueOf(i + 1) + ":\n" + matches.get(i));
+		}
+		
+		System.out.println(result);
+		writeMsg(result);
 	}
 	
 	private void closeConnection() {
