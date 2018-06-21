@@ -46,7 +46,7 @@ public class Client {
 				}
 				break;
 			case "a":
-				if (args.length == 1) {
+				if (args.length == 2) {
 					client.addDiagnoses(args[1]);
 				}else {
 					promptErrorAndReturn();

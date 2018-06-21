@@ -53,6 +53,7 @@ public class Server implements Runnable {
 			break;
 		case 3:
 			listDiagnoses(readMsg());
+			break;
 		default: // Invalid option
 			writeMsg("Invalid option.");
 			break;
